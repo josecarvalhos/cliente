@@ -1,6 +1,7 @@
 package com.cliente.cliente.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.cliente.cliente.model.entity.Cliente;
 
@@ -12,8 +13,10 @@ public interface ClienteService {
 	
 	void deletar(Cliente cliente);
 	
-	List<Cliente> buscar(Cliente clienteFiltro);
+	List<Cliente> buscar();
 	
 	void validar(Cliente cliente);
+	
+	Optional<Cliente> obterPorId(Long id);
 
 }

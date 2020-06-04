@@ -2,12 +2,10 @@ package com.cliente.cliente.service.impl;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.stereotype.Service;
 
 import com.cliente.cliente.exception.RegraNegocioException;
@@ -47,12 +45,8 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	@Transactional
-	public List<Cliente> buscar(Cliente clienteFiltro) {
-		Example example = Example.of(clienteFiltro, 
-				ExampleMatcher.matching()
-					.withIgnoreCase()
-					.withStringMatcher(StringMatcher.CONTAINING));
-		return repository.findAll(example);
+	public List<Cliente> buscar() {
+		return repository.findAll();
 	}
 
 	@Override
@@ -63,6 +57,11 @@ public class ClienteServiceImpl implements ClienteService {
 			
 		}
 		
+	}
+
+	@Override
+	public Optional<Cliente> obterPorId(Long id) {
+		return repository.findById(id);
 	}
 
 

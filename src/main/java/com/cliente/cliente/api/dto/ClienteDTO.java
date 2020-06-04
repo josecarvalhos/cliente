@@ -1,7 +1,13 @@
 package com.cliente.cliente.api.dto;
 
+import java.util.List;
+
+import com.cliente.cliente.model.entity.Email;
+import com.cliente.cliente.model.entity.Telefone;
+
 public class ClienteDTO {
 	
+	private Long id;
 	private String nome;
 	private String logradouro;
 	private String bairro;
@@ -11,6 +17,16 @@ public class ClienteDTO {
 	private long cpf;
 	private long cep;
 	
+	private List<Telefone> telefones;
+	private List<Email> emails;
+	
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getNome() {
 		return nome;
 	}
@@ -59,5 +75,16 @@ public class ClienteDTO {
 	public void setCep(long cep) {
 		this.cep = cep;
 	}
-	
+	public List<Telefone> getTelefones() {
+		return telefones;
+	}
+	public void setTelefones(List<Telefone> telefones) {
+		this.telefones = telefones;
+	}
+	public List<Email> getEmails() {
+		return emails;
+	}
+	public void setEmails(List<Email> emails) {
+		this.emails = emails;
+	}
 }
