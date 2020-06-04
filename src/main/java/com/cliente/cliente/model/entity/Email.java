@@ -19,11 +19,11 @@ public class Email {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="email")
+	@Column(name="email", length=50, nullable=false)
 	private String email;
 	
 	@ManyToOne
-	@JoinColumn(name="id_cliente")
+	@JoinColumn(name="id_cliente", nullable=false)
 	private Cliente cliente;
 
 	public Long getId() {

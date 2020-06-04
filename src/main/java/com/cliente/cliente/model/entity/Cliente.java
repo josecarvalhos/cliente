@@ -21,29 +21,29 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="nome")
+	@Column(name="nome", length=100, nullable=false)
 	private String nome;
 	
-	@Column(name="logradouro")
+	@Column(name="logradouro", length=100, nullable=false)
 	private String logradouro;
 	
-	@Column(name="bairro")
+	@Column(name="bairro", length=100, nullable=false)
 	private String bairro;
 	
-	@Column(name="cidade")
+	@Column(name="cidade", length=100, nullable=false)
 	private String cidade;
 	
-	@Column(name="uf")
+	@Column(name="uf", length=2, nullable=false)
 	private String uf;
 	
-	@Column(name="complemento")
+	@Column(name="complemento", length=100)
 	private String complemento;
 	
-	@Column(name="cpf")
-	private long cpf;
+	@Column(name="cpf", nullable=false)
+	private Long cpf;
 	
-	@Column(name="cep")
-	private long cep;
+	@Column(name="cep", nullable=false)
+	private Long cep;
 	
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private List<Telefone> telefones;
@@ -107,19 +107,19 @@ public class Cliente {
 		this.complemento = complemento;
 	}
 
-	public long getCpf() {
+	public Long getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(long cpf) {
+	public void setCpf(Long cpf) {
 		this.cpf = cpf;
 	}
 
-	public long getCep() {
+	public Long getCep() {
 		return cep;
 	}
 
-	public void setCep(long cep) {
+	public void setCep(Long cep) {
 		this.cep = cep;
 	}
 	

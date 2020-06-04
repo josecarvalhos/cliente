@@ -21,13 +21,13 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="nome")
+	@Column(name="nome", length=100, nullable=false)
 	private String nome;
 	
-	@Column(name="perfil")
+	@Column(name="perfil", length=15, nullable=false)
 	private String perfil;
 	
-	@Column(name="usuario")
+	@Column(name="usuario", length=50, nullable=false)
 	private String usuario;
 	
 	@Column(name="senha")

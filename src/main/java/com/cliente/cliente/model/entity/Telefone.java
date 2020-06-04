@@ -22,15 +22,15 @@ public class Telefone {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="tipo")
+	@Column(name="tipo", length=15, nullable=false)
 	@Enumerated
 	private TipoTelefoneEnum tipoTelefone;
 	
-	@Column(name="numero")
+	@Column(name="numero", nullable=false)
 	private long numero;
 	
 	@ManyToOne
-	@JoinColumn(name="id_cliente")
+	@JoinColumn(name="id_cliente", nullable=false)
 	private Cliente cliente;
 
 	public Long getId() {
