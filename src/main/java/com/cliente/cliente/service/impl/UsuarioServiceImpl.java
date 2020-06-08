@@ -22,12 +22,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public Usuario autenticar(String usuario, long senha) {
+	public Usuario autenticar(String usuario, String senha) {
 		Optional<Usuario> usuarioEncontrado = repository.findByUsuario(usuario);
 		if (!usuarioEncontrado.isPresent()) {
 			throw new ErroAutenticacao("usuário não encontrdo.");
 		}
-		if (usuarioEncontrado.get().getSenha() != senha) {
+		if (!senha.equals(usuarioEncontrado.get().getSenha())) {
 			throw new ErroAutenticacao("senha inválida.");
 		}
 		return usuarioEncontrado.get();

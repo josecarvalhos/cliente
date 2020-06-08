@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cliente.cliente.api.dto.ClienteDTO;
@@ -29,13 +30,34 @@ public class ClienteResource {
 		this.service = service;
 	}
 	
-	@GetMapping
-	public ResponseEntity buscar() {
+	@GetMapping("/comParametro")
+	public ResponseEntity buscarComPrametro(@RequestParam(value = "cpf") Long cpf) {
 		
-		List<Cliente> clientes = service.buscar();
+		Cliente clienteFiltro = new Cliente();
+		clienteFiltro.setCpf(cpf);
+		
+		List<Cliente> clientes = service.buscar(clienteFiltro);
 		
 		return ResponseEntity.ok(clientes);
 
+	}
+	
+	
+	@GetMapping
+	public ResponseEntity buscar() {
+		Cliente clienteFiltro = new Cliente();
+		
+		List<Cliente> clientes = service.buscar(clienteFiltro);
+		
+		return ResponseEntity.ok(clientes);
+
+	}
+	
+	@GetMapping("{id}")
+	public ResponseEntity obterCliente(@PathVariable("id") Long id) {
+		return service.obterPorId(id)
+				.map(cliente -> new ResponseEntity(converter(cliente), HttpStatus.OK))
+				.orElseGet( () -> new ResponseEntity(HttpStatus.NOT_FOUND));
 	}
 
 	@PostMapping
@@ -71,6 +93,25 @@ public class ClienteResource {
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
 		}).orElseGet( () -> 
 			new ResponseEntity("Cliente não encontrado na base de dados", HttpStatus.BAD_REQUEST));
+	}
+	
+	private ClienteDTO converter(Cliente cliente) {
+		ClienteDTO dto = new ClienteDTO();
+		
+		dto.setId(cliente.getId());
+		dto.setNome(cliente.getNome());
+		dto.setLogradouro(cliente.getLogradouro());
+		dto.setBairro(cliente.getBairro());
+		dto.setCidade(cliente.getCidade());
+		dto.setUf(cliente.getUf());
+		dto.setComplemento(cliente.getComplemento());
+		dto.setCpf(cliente.getCpf());
+		dto.setCep(cliente.getCep());
+		dto.setTelefones(cliente.getTelefones());
+		dto.setEmails(cliente.getEmails());
+		
+		return dto;
+
 	}
 	
 	private Cliente converter(ClienteDTO dto) {

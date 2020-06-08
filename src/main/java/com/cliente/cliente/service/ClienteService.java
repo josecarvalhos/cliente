@@ -13,7 +13,7 @@ public interface ClienteService {
 	
 	void deletar(Cliente cliente);
 	
-	List<Cliente> buscar();
+	List<Cliente> buscar(Cliente cliente);
 	
 	void validar(Cliente cliente);
 	

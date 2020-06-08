@@ -14,8 +14,8 @@ public class ClienteDTO {
 	private String cidade;
 	private String uf;
 	private String complemento;
-	private long cpf;
-	private long cep;
+	private Long cpf;
+	private Long cep;
 	
 	private List<Telefone> telefones;
 	private List<Email> emails;
@@ -63,16 +63,16 @@ public class ClienteDTO {
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
-	public long getCpf() {
+	public Long getCpf() {
 		return cpf;
 	}
-	public void setCpf(long cpf) {
+	public void setCpf(Long cpf) {
 		this.cpf = cpf;
 	}
-	public long getCep() {
+	public Long getCep() {
 		return cep;
 	}
-	public void setCep(long cep) {
+	public void setCep(Long cep) {
 		this.cep = cep;
 	}
 	public List<Telefone> getTelefones() {

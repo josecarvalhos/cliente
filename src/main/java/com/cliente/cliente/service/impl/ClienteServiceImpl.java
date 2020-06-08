@@ -6,6 +6,9 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.stereotype.Service;
 
 import com.cliente.cliente.exception.RegraNegocioException;
@@ -45,8 +48,12 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	@Transactional
-	public List<Cliente> buscar() {
-		return repository.findAll();
+	public List<Cliente> buscar(Cliente clienteFiltro) {
+		Example example = Example.of(clienteFiltro, 
+				ExampleMatcher.matching()
+				.withIgnoreCase().withStringMatcher(StringMatcher.CONTAINING));
+		
+		return repository.findAll(example);
 	}
 
 	@Override
@@ -80,13 +87,13 @@ public class ClienteServiceImpl implements ClienteService {
 			throw new RegraNegocioException("CEP é um campo obrigatório.");
 		}
 		
-		if (cliente.getTelefones() == null || cliente.getTelefones().size() == 0) {
-			throw new RegraNegocioException("Telefone é um campo obrigatório.");
-		}
-		
-		if (cliente.getEmails() == null || cliente.getEmails().size() == 0) {
-			throw new RegraNegocioException("Email é um campo obrigatório.");
-		}
+//		if (cliente.getTelefones() == null || cliente.getTelefones().size() == 0) {
+//			throw new RegraNegocioException("Telefone é um campo obrigatório.");
+//		}
+//		
+//		if (cliente.getEmails() == null || cliente.getEmails().size() == 0) {
+//			throw new RegraNegocioException("Email é um campo obrigatório.");
+//		}
 		
 	}
 

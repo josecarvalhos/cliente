@@ -5,7 +5,7 @@ public class UsuarioDTO {
 	private String nome;
 	private String perfil;
 	private String usuario;
-	private long senha;
+	private String senha;
 	
 	
 	public String getNome() {
@@ -26,10 +26,10 @@ public class UsuarioDTO {
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
-	public long getSenha() {
+	public String getSenha() {
 		return senha;
 	}
-	public void setSenha(long senha) {
+	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 

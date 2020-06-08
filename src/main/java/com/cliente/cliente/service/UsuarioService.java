@@ -4,6 +4,6 @@ import com.cliente.cliente.model.entity.Usuario;
 
 public interface UsuarioService {
 	
-	Usuario autenticar(String usuario, long senha);
+	Usuario autenticar(String usuario, String senha);
 
 }

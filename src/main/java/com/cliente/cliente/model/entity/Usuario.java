@@ -8,10 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
-
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-
 @Entity
 @Table(name="usuario", schema="cliente")
 public class Usuario {
@@ -31,7 +27,7 @@ public class Usuario {
 	private String usuario;
 	
 	@Column(name="senha")
-	private long senha;
+	private String senha;
 	
 	
 	public Long getId() {
@@ -66,11 +62,11 @@ public class Usuario {
 		this.usuario = usuario;
 	}
 
-	public long getSenha() {
+	public String getSenha() {
 		return senha;
 	}
 
-	public void setSenha(long senha) {
+	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 
@@ -78,10 +74,10 @@ public class Usuario {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((perfil == null) ? 0 : perfil.hashCode());
-		result = prime * result + (int) (senha ^ (senha >>> 32));
+		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
@@ -95,7 +91,10 @@ public class Usuario {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
@@ -107,7 +106,10 @@ public class Usuario {
 				return false;
 		} else if (!perfil.equals(other.perfil))
 			return false;
-		if (senha != other.senha)
+		if (senha == null) {
+			if (other.senha != null)
+				return false;
+		} else if (!senha.equals(other.senha))
 			return false;
 		if (usuario == null) {
 			if (other.usuario != null)
@@ -122,6 +124,5 @@ public class Usuario {
 		return "Usuario [id=" + id + ", nome=" + nome + ", perfil=" + perfil + ", usuario=" + usuario + ", senha="
 				+ senha + "]";
 	}
-
 
 }
